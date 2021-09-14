@@ -1,18 +1,43 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
 import "./App.css";
+import City from "./City";
+import CityList from "./CityList";
 
-class App extends Component {
-  constructor(props) {
-    super(props);
+function App(props) {
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [cities, setCities] = useState([
+    { name: "Moscow", description: "Capital of Russia" },
+    { name: "Zelenograd", description: "Scientific satelite of Moscow" },
+  ]);
 
-    this.state = {
-      num: 0,
-    };
-  }
+  const handlerChangeCity = (n, description) => {
+    setCities(
+      cities.map((city, index) => {
+        if (index === n) {
+          return {
+            ...city,
+            description,
+          };
+        }
+        return city;
+      })
+    );
+  };
 
-  render() {
-    return <div className="App"></div>;
-  }
+  const handlerSelectCity = (n) => {
+    setCurrentIndex(n);
+  };
+
+  return (
+    <div className="App">
+      <City
+        cities={cities}
+        onChangeCity={handlerChangeCity}
+        currentIndex={currentIndex}
+      />
+      <CityList cities={cities} onSelectCity={handlerSelectCity} />
+    </div>
+  );
 }
 
 export default App;
