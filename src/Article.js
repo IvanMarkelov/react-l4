@@ -1,4 +1,4 @@
-import { Component } from "react";
+import React, { Component } from "react";
 import { Button, Card, Elevation, H2, Label } from "@blueprintjs/core";
 import "@blueprintjs/core/lib/css/blueprint.css";
 
